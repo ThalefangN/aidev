@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Image, StyleSheet, Text } from "react-native";
+import { View, Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 import {
   Padding,
   Color,
@@ -10,58 +10,84 @@ import {
 } from "../GlobalStyles";
 
 export type DailyCheckUpType = {
-  onClose?: () => void;
+  onClose?: () => void; // Optional close handler
+  onNext?: () => void; // Optional next handler
+  onMoodSelect?: (mood: string) => void; // Optional mood select handler
 };
 
-const DailyCheckUp = ({ onClose }: DailyCheckUpType) => {
+const DailyCheckUp = ({ onClose, onNext, onMoodSelect }: DailyCheckUpType) => {
+  // Handle selecting a mood
+  const handleMoodSelect = (mood: string) => {
+    if (onMoodSelect) onMoodSelect(mood);
+  };
+
   return (
     <View style={styles.dailycheckup}>
+      {/* Background Image */}
       <Image
         style={styles.nicePatternForStepsPage}
         resizeMode="cover"
         source={require("../assets/nice-pattern-for-steps-page6.png")}
       />
+      
+      {/* Title */}
       <Text style={styles.tipHeading}>Daily Checkup</Text>
       <Text style={styles.tipHeading1}>How do you feel today?</Text>
+
+      {/* Mood Options */}
       <View style={[styles.moodOptions, styles.moodLayout]}>
-        <View style={[styles.mood, styles.moodBorder]}>
+        <TouchableOpacity style={[styles.mood, styles.moodBorder]} onPress={() => handleMoodSelect('neutral')}>
           <Image
             style={styles.fa6SolidfaceMehIcon}
             resizeMode="cover"
             source={require("../assets/fa6solidfacemeh.png")}
           />
           <Text style={[styles.tipHeading2, styles.tipTypo]}>Neutral Mood</Text>
-        </View>
-        <View style={[styles.mood, styles.moodBorder]}>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={[styles.mood, styles.moodBorder]} onPress={() => handleMoodSelect('happy')}>
           <Image
             style={styles.fa6SolidfaceMehIcon}
             resizeMode="cover"
             source={require("../assets/streamlinehappyfacesolid.png")}
           />
           <Text style={[styles.tipHeading2, styles.tipTypo]}>Happy</Text>
-        </View>
-        <View style={[styles.mood, styles.moodBorder]}>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={[styles.mood, styles.moodBorder]} onPress={() => handleMoodSelect('sad')}>
           <Image
             style={styles.claritysadFaceSolidIcon}
             resizeMode="cover"
             source={require("../assets/claritysadfacesolid.png")}
           />
           <Text style={[styles.tipHeading2, styles.tipTypo]}>Sad</Text>
-        </View>
+        </TouchableOpacity>
       </View>
+
+      {/* Additional Image (Can be adjusted based on layout needs) */}
       <Image
         style={styles.naledi31}
         resizeMode="cover"
         source={require("../assets/naledi-3-13.png")}
       />
-      <Image
-        style={styles.eicloseOIcon}
-        resizeMode="cover"
-        source={require("../assets/eicloseo.png")}
-      />
-      <View style={[styles.mood3, styles.moodBorder]}>
-        <Text style={[styles.tipHeading5, styles.tipTypo]}>Next</Text>
-      </View>
+
+      {/* Close Button */}
+      {onClose && (
+        <TouchableOpacity style={styles.eicloseOIcon} onPress={onClose}>
+          <Image
+            style={styles.eicloseOIconImage}
+            resizeMode="cover"
+            source={require("../assets/eicloseo.png")}
+          />
+        </TouchableOpacity>
+      )}
+
+      {/* Next Button */}
+      {onNext && (
+        <TouchableOpacity style={[styles.mood3, styles.moodBorder]} onPress={onNext}>
+          <Text style={[styles.tipHeading5, styles.tipTypo]}>Next</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -152,6 +178,10 @@ const styles = StyleSheet.create({
     width: 59,
     height: 59,
     position: "absolute",
+  },
+  eicloseOIconImage: {
+    width: "100%",
+    height: "100%",
   },
   tipHeading5: {
     color: Color.white,
