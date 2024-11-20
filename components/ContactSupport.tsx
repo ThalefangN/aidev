@@ -20,8 +20,8 @@ export type ContactSupportType = {
 
 const ContactSupport = ({
   nicePatternForStepsPage,
-  tipHeading,
-  tipHeading1,
+  tipHeading = "Default Heading",
+  tipHeading1 = "Default Subheading",
   ellipse7,
 }: ContactSupportType) => {
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
@@ -30,11 +30,12 @@ const ContactSupport = ({
     <Pressable
       style={styles.contactSupport}
       onPress={() => navigation.navigate("NewSessionChat5")}
+      accessibilityLabel="Contact Support"
     >
       <Image
         style={styles.nicePatternForStepsPage}
         resizeMode="cover"
-        source={nicePatternForStepsPage}
+        source={nicePatternForStepsPage || require('path/to/default-image.jpg')}
       />
       <Text style={[styles.tipHeading, styles.tipHeadingTypo]}>
         {tipHeading}
@@ -46,7 +47,7 @@ const ContactSupport = ({
       <Image
         style={styles.contactSupportChild}
         resizeMode="cover"
-        source={ellipse7}
+        source={ellipse7 || require('path/to/default-icon.jpg')}
       />
       <View style={styles.seeChallengeButton}>
         <Text style={[styles.quickContact, styles.tipHeadingTypo]}>
@@ -137,6 +138,8 @@ const styles = StyleSheet.create({
     width: 182,
     height: 194,
     overflow: "hidden",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
