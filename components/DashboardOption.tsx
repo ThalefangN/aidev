@@ -23,6 +23,8 @@ const DashboardOption = () => {
         <Pressable
           style={styles.seeFlexBox}
           onPress={() => navigation.navigate("OngoingSessionChat")}
+          accessible={true}
+          accessibilityLabel="Continue previous chat"
         >
           <View style={[styles.seeChallengeButton, styles.seeFlexBox]}>
             <Text style={styles.continueChat}>Continue Chat</Text>
@@ -30,7 +32,7 @@ const DashboardOption = () => {
         </Pressable>
       </View>
       <Text style={[styles.tipHeading, styles.frameIconPosition]}>
-        Would you like to continue your previous chat ?
+        Would you like to continue your previous chat?
       </Text>
     </View>
   );
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
   },
   frameIcon: {
     top: -93,
-    width: 461,
+    width: "100%", // Use relative width for better responsiveness
     height: 333,
     overflow: "hidden",
   },
