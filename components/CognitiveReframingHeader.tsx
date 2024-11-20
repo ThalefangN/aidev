@@ -1,32 +1,34 @@
-import * as React from "react";
+import React from "react";
 import { Image, StyleSheet, Pressable, Text, View } from "react-native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { useNavigation, ParamListBase } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native"; // for navigation
 import { FontSize, FontFamily, Color, Gap } from "../GlobalStyles";
 
 const CognitiveReframingHeader = () => {
-  const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
+  const navigation = useNavigation(); // Hook for navigation
+
+  // Sample function to navigate to another screen
+  const handlePress = () => {
+    // Example of navigation, replace with the actual screen you want to navigate to
+    navigation.navigate("SomeScreen");
+  };
 
   return (
     <View style={styles.cognitiveReframingHeader}>
-      <Pressable
-        style={styles.chatIcon}
-        onPress={() => navigation.navigate("ResourcesCentre1")}
-      >
+      <Pressable onPress={handlePress}>
         <Image
-          style={styles.icon}
-          resizeMode="cover"
-          source={require("../assets/chat-icon.png")}
+          source={require("../assets/your-icon.png")} // replace with your icon source
+          style={styles.chatIcon}
         />
       </Pressable>
-      <View style={styles.mockLogo}>
-        <Text style={styles.cognitiveReframing}>{`Cognitive Reframing `}</Text>
-      </View>
-      <Image
-        style={styles.mioptionsVerticalIcon}
-        resizeMode="cover"
-        source={require("../assets/mioptionsvertical.png")}
-      />
+
+      <Text style={styles.cognitiveReframing}>Cognitive Reframing</Text>
+
+      <Pressable onPress={handlePress}>
+        <Image
+          source={require("../assets/mock-logo.png")} // replace with your logo source
+          style={styles.mockLogo}
+        />
+      </Pressable>
     </View>
   );
 };
@@ -57,11 +59,6 @@ const styles = StyleSheet.create({
   mockLogo: {
     height: 34,
     width: 211,
-  },
-  mioptionsVerticalIcon: {
-    width: 24,
-    height: 24,
-    display: "none",
   },
   cognitiveReframingHeader: {
     top: 27,
