@@ -36,7 +36,7 @@ const ChallengePreview = () => {
         </View>
         <View style={[styles.frame1, styles.framePosition]}>
           <Text style={[styles.tipeContent, styles.tipHeadingFlexBox]}>
-            I hope you are well , it`s a great day isn`t it ?
+            I hope you are well, it's a great day, isn't it?
           </Text>
         </View>
         <View style={[styles.frame2, styles.framePosition]}>
@@ -50,16 +50,18 @@ const ChallengePreview = () => {
           source={require("../assets/nice-pattern-for-steps-page8.png")}
         />
         <View style={[styles.frame3, styles.framePosition1]}>
-          <Image
-            style={styles.naledi31}
-            resizeMode="cover"
-            source={require("../assets/naledi-3-16.png")}
-          />
+          <Pressable onPress={() => alert('Image clicked!')}>
+            <Image
+              style={styles.naledi31}
+              resizeMode="cover"
+              source={require("../assets/naledi-3-16.png")}
+            />
+          </Pressable>
         </View>
         <View style={[styles.frame4, styles.frame4Layout]}>
-          <View style={[styles.seeChallengeButton1, styles.frame4Layout]}>
+          <Pressable style={styles.seeChallengeButton1} onPress={() => alert('SAD button clicked!')}>
             <Text style={styles.sad}>SAD</Text>
-          </View>
+          </Pressable>
         </View>
       </LinearGradient>
 
@@ -67,7 +69,7 @@ const ChallengePreview = () => {
         <View style={styles.frameContainerOverlay}>
           <Pressable
             style={styles.frameContainerBg}
-            onPress={closeFrameContainer}
+            onPress={closeFrameContainer} // Close the modal when clicking the background
           />
           <DailyCheckUp onClose={closeFrameContainer} />
         </View>
