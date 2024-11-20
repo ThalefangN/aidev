@@ -1,21 +1,28 @@
+// Root-level build.gradle file
 buildscript {
     ext {
-        buildToolsVersion = "34.0.0"
-        minSdkVersion = 21
-        compileSdkVersion = 34
-        targetSdkVersion = 34
-        ndkVersion = "25.1.8937393"
-        kotlinVersion = "1.8.0"
+        // Define the versions of the tools and dependencies that will be used across your project.
+        buildToolsVersion = "34.0.0"          // Build tools version
+        minSdkVersion = 21                    // Minimum SDK version supported
+        compileSdkVersion = 34                // SDK version to compile with
+        targetSdkVersion = 34                 // Target SDK version for the final app
+        ndkVersion = "25.1.8937393"           // NDK version for native code (if needed)
+        kotlinVersion = "1.8.0"               // Kotlin version for the project
     }
+
     repositories {
-        google()
-        mavenCentral()
+        google()  // Google's Maven repository for Android tools
+        mavenCentral()  // Maven Central repository for other dependencies
     }
+
     dependencies {
-        classpath("com.android.tools.build:gradle")
-        classpath("com.facebook.react:react-native-gradle-plugin")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+        // Classpath dependencies needed for building the app
+        classpath("com.android.tools.build:gradle:7.4.0")  // Android Gradle Plugin version
+        classpath("com.facebook.react:react-native-gradle-plugin")  // React Native Gradle plugin
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")  // Kotlin Gradle plugin
     }
 }
 
-apply plugin: "com.facebook.react.rootproject"
+apply plugin: "com.facebook.react.rootproject"  // Apply the React Native root project plugin
+
+// Additional configurations can be added below as necessary
