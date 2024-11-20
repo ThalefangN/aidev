@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useCallback } from "react";
 import { Image, StyleSheet, Text, View, Pressable, Modal } from "react-native";
-import NotificationsPopUp from "./NotificationsPopUp";
-import { Color, FontSize, FontFamily, Gap } from "../GlobalStyles";
+import NotificationsPopUp from "./NotificationsPopUp"; // Assuming this component exists
+import { Color, FontSize, FontFamily, Gap } from "../GlobalStyles"; // Assuming this file contains your global styles
 
 export type AppHeaderType = {
   /** Style props */
@@ -13,6 +13,7 @@ const getStyleValue = (key: string, value: string | number | undefined) => {
   if (value === undefined) return;
   return { [key]: value === "unset" ? undefined : value };
 };
+
 const AppHeader = ({ appHeaderMarginLeft, appHeaderTop }: AppHeaderType) => {
   const appHeaderStyle = useMemo(() => {
     return {
@@ -40,6 +41,7 @@ const AppHeader = ({ appHeaderMarginLeft, appHeaderTop }: AppHeaderType) => {
             style={styles.logoIcon1}
             resizeMode="cover"
             source={require("../assets/logo-icon-1.png")}
+            accessibilityLabel="Logo" // Accessibility improvement
           />
           <Text style={styles.nalediai}>
             <Text style={styles.naledi}>naledi.</Text>
@@ -49,11 +51,13 @@ const AppHeader = ({ appHeaderMarginLeft, appHeaderTop }: AppHeaderType) => {
         <Pressable
           style={styles.mynauinotification}
           onPress={openMynauinotificationIcon}
+          accessibilityLabel="Open Notifications"
         >
           <Image
             style={styles.icon}
             resizeMode="cover"
             source={require("../assets/mynauinotification.png")}
+            accessibilityLabel="Notification Icon"
           />
         </Pressable>
       </View>
@@ -67,6 +71,7 @@ const AppHeader = ({ appHeaderMarginLeft, appHeaderTop }: AppHeaderType) => {
           <Pressable
             style={styles.mynauinotificationIconBg}
             onPress={closeMynauinotificationIcon}
+            accessibilityLabel="Close Notifications"
           />
           <NotificationsPopUp onClose={closeMynauinotificationIcon} />
         </View>
