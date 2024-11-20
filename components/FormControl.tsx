@@ -11,22 +11,29 @@ import {
 
 export type FormControlType = {
   emailAddress?: string;
-  tlhalefangntshilanegmailc?: string;
+  secondaryEmail?: string; // Renamed for better readability
 
   /** Style props */
   formControlTop?: number | string;
   formControlLeft?: number | string;
+
+  /** Optional props for error and caption visibility */
+  isError?: boolean;
+  isCaptionVisible?: boolean;
 };
 
 const getStyleValue = (key: string, value: string | number | undefined) => {
   if (value === undefined) return;
   return { [key]: value === "unset" ? undefined : value };
 };
+
 const FormControl = ({
   formControlTop,
   formControlLeft,
   emailAddress,
-  tlhalefangntshilanegmailc,
+  secondaryEmail,
+  isError = false,
+  isCaptionVisible = false,
 }: FormControlType) => {
   const formControlStyle = useMemo(() => {
     return {
@@ -39,23 +46,26 @@ const FormControl = ({
     <View style={[styles.formControl, formControlStyle]}>
       <Text style={styles.emailAddress}>{emailAddress}</Text>
       <View style={styles.input}>
-        <Text style={styles.tlhalefangntshilanegmailcom}>
-          {tlhalefangntshilanegmailc}
+        <Text style={styles.secondaryEmail}>
+          {secondaryEmail}
         </Text>
       </View>
-      <Text style={[styles.thisIsA, styles.thisIsALayout]}>
-        This is a caption
-      </Text>
-      <Text style={[styles.optionalErrorCaption, styles.thisIsALayout]}>
-        This is an error caption!
-      </Text>
+      {isCaptionVisible && (
+        <Text style={[styles.thisIsA, styles.thisIsALayout]}>
+          This is a caption
+        </Text>
+      )}
+      {isError && (
+        <Text style={[styles.optionalErrorCaption, styles.thisIsALayout]}>
+          This is an error caption!
+        </Text>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   thisIsALayout: {
-    display: "none",
     width: 320,
     textAlign: "left",
     lineHeight: 20,
@@ -70,7 +80,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     width: 374,
   },
-  tlhalefangntshilanegmailcom: {
+  secondaryEmail: {
     color: Color.favouriteFont,
     fontSize: FontSize.textSmLineHeight5FontNormal_size,
     alignSelf: "stretch",
